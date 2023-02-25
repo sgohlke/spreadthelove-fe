@@ -1,0 +1,24 @@
+<html>
+<head>
+</head>
+<body>
+    <script>
+        function spreadlove() {
+            fetch('https://spreadthelove.deno.dev/spreadlove').then(response => { }).catch(error => { })
+        }
+    </script>
+    <h1>Spread some love ❤️</h1>
+    <input type='button' value='Spread some love!' onclick='spreadlove()'>
+    <div id="hearts"></div>
+    <script>
+        const evtSource = new EventSource("//spreadthelove.deno.dev/getlove");
+        var hearts = document.getElementById('hearts');
+        evtSource.onmessage = (event) => {
+            var item = document.createElement('span');
+            item.innerHTML = event.data + '<br>';
+            hearts.appendChild(item);
+            window.scrollTo(0, document.body.scrollHeight);
+        }
+    </script>
+</body>
+</html>
